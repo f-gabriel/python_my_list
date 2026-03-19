@@ -1,0 +1,53 @@
+from Container import Container
+from ContainerHelpers import *
+from container_interfaces import I_Has_Iterator as IHI
+
+class Multicontainer(Container, IHI):
+    def __init__(self, value = None, brackets = ''):
+        super().__init__(value)
+        self.iterator = Container_Itterator(self) # keeps track of next item to return in __next__() and similar functions
+        self.representation = String_Representation(self, brackets)
+
+    def add(self, item):
+        if self.value == None:
+            self.value = item
+            return
+        elif self.next_value == None:
+            self.next_value = self.__class__()
+        self.next_value.add(item)
+            
+    def __len__(self):
+        length = 0
+        for item in self:
+            length += 1
+        return length
+    
+    def __set__(self, instance, value):
+        container: Multicontainer = self.__get__(instance)
+        container.set_value(value)
+        
+    def __get__(self, position): 
+        index = 0
+        for item in self:
+            if index == position:
+                return item
+            index += 1
+        raise IndexError
+    
+    def __getitem__(self, key):
+        self.__get__(key)
+
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        try:
+            #print('is in multi try')
+            return self.iterator.__next__()
+        except StopIteration:
+            #print('is in multi except')
+            raise StopIteration   
+        
+    def __repr__(self):
+        return self.representation.string_representation()
+        
