@@ -7,7 +7,6 @@ def main():
 
     
     print(c_list)
-    print('is here')
     print(c_list[2])
 
 if __name__ == '__main__':

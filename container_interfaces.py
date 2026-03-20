@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class I_Has_Iterator(ABC):
     @abstractmethod
     def __init__(self):

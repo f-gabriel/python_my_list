@@ -1,4 +1,5 @@
 from Multicontainer import Multicontainer as MC
+from Container import Container
 
 
 class My_List(MC):
@@ -6,13 +7,16 @@ class My_List(MC):
         super().__init__(value, '[]')
             
     def get_values(self):
-        print('is here')
         next: My_List = super().__next__()
         return next.get_value()
     
     def __add__(self, other: MC):
         for item in other:
             self.add(item)
+
+    def __getitem__(self, key):
+        item: Container = super().__getitem__(key)
+        return item.get_value()
 
     
 

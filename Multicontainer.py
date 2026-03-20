@@ -28,6 +28,7 @@ class Multicontainer(Container, IHI):
         
     def __get__(self, position): 
         index = 0
+        item: Container
         for item in self:
             if index == position:
                 return item
@@ -35,18 +36,16 @@ class Multicontainer(Container, IHI):
         raise IndexError
     
     def __getitem__(self, key):
-        self.__get__(key)
+        return self.__get__(key)
 
     def __iter__(self):
         return self
     
     def __next__(self):
         try:
-            #print('is in multi try')
             return self.iterator.__next__()
         except StopIteration:
-            #print('is in multi except')
-            raise StopIteration   
+            raise    
         
     def __repr__(self):
         return self.representation.string_representation()
