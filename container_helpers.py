@@ -1,5 +1,5 @@
 from container_interfaces import I_Has_Iterator as IHI
-from Container import Container
+from container import *
 
 class Container_Itterator(IHI):
     def __init__(self, user_object: IHI):
@@ -27,7 +27,6 @@ class Container_Itterator(IHI):
         except IndexError:
             raise StopIteration
         
-
 
 class String_Representation:
     def __init__(self, user_object, brackets: str):

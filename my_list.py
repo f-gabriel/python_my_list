@@ -1,5 +1,5 @@
-from Multicontainer import Multicontainer as MC
-from Container import Container
+from multicontainer import Multicontainer as MC
+from container import *
 
 
 class My_List(MC):
@@ -12,7 +12,7 @@ class My_List(MC):
     
     def __add__(self, other: MC):
         for item in other:
-            self.add(item)
+            self.add(item.get_value())
 
     def __getitem__(self, key):
         item: Container = super().__getitem__(key)
@@ -20,6 +20,5 @@ class My_List(MC):
         return item.get_value()
 
     
-
     def sort():
         pass

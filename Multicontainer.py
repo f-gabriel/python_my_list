@@ -1,5 +1,5 @@
-from Container import Container
-from ContainerHelpers import *
+from container import *
+from container_helpers import *
 from container_interfaces import I_Has_Iterator as IHI
 
 class Multicontainer(Container, IHI):
@@ -7,7 +7,6 @@ class Multicontainer(Container, IHI):
         super().__init__(value)
         self.iterator = Container_Itterator(self) # keeps track of next item to return in __next__() and similar functions
         self.representation = String_Representation(self, brackets)
-
 
     def add(self, item):
         if self.value == None:
@@ -27,17 +26,15 @@ class Multicontainer(Container, IHI):
         container: Multicontainer = self.__get__(instance)
         container.set_value(value)
         
-    def __get__(self, position): 
+
+    def __getitem__(self, key):
         index = 0
         item: Container
         for item in self:
-            if index == position:
+            if index == key:
                 return item
             index += 1
         raise IndexError
-    
-    def __getitem__(self, key):
-        return self.__get__(key)
 
     def __iter__(self):
         return self

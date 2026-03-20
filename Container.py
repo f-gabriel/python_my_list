@@ -1,8 +1,8 @@
-from ContainerHelpers import *
+from container_helpers import *
 from abc import ABC, abstractmethod
 
         
-        
+
 class Container(ABC):
     def __init__(self, value = None):
         self.value = value
@@ -20,6 +20,9 @@ class Container(ABC):
 
     def get_next_value(self):
         return self.next_value
+    
+    def __get__(self):
+        return self.value
     
     
         
