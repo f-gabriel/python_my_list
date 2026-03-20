@@ -8,6 +8,7 @@ class Multicontainer(Container, IHI):
         self.iterator = Container_Itterator(self) # keeps track of next item to return in __next__() and similar functions
         self.representation = String_Representation(self, brackets)
 
+
     def add(self, item):
         if self.value == None:
             self.value = item

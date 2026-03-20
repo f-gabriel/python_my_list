@@ -16,6 +16,7 @@ class My_List(MC):
 
     def __getitem__(self, key):
         item: Container = super().__getitem__(key)
+
         return item.get_value()
 
     

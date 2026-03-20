@@ -6,4 +6,3 @@ class MyDictionary(Multicontainer):
         self.key = key
 
     def add(self, key):
-        

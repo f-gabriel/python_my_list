@@ -8,6 +8,7 @@ def main():
     
     print(c_list)
     print(c_list[2])
+    
 
 if __name__ == '__main__':
     main()
