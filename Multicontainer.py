@@ -3,6 +3,8 @@ from container_helpers import *
 from container_interfaces import I_Has_Iterator as IHI
 
 class Multicontainer(Container, IHI):
+    
+
     def __init__(self, value = None, brackets = ''):
         super().__init__(value)
         self.iterator = Container_Itterator(self) # keeps track of next item to return in __next__() and similar functions
@@ -22,19 +24,24 @@ class Multicontainer(Container, IHI):
             length += 1
         return length
     
-    def __set__(self, instance, value):
-        container: Multicontainer = self.__get__(instance)
-        container.set_value(value)
-        
+    def __contains__(self, item):
+        container: Multicontainer
+        for container in self:
+            if container.get_value() == item:
+                return True
+        return False
 
     def __getitem__(self, key):
         index = 0
-        item: Container
+        item: Multicontainer
         for item in self:
             if index == key:
                 return item
             index += 1
         raise IndexError
+    
+    def __setitem__(self, key, value):
+        self.__getitem__(key).set_next_value(value)
 
     def __iter__(self):
         return self
