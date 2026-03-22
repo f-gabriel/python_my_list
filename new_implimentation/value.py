@@ -7,5 +7,4 @@ class Value():
         return getattr(instance, self.private_name)
     
     def __set__(self, instance, value):
-        ### maybe something
         setattr(instance, self.private_name, value)

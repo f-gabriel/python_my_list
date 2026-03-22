@@ -1,37 +1,40 @@
 from new_container import *
 from container_implementation import *
 
-class Containers(New_Container): # kanske vill ha attribut för om detta är huvud-containern
+class Containers(New_Container): 
     implementation: C_Implementation_Interface
-    next_value: Containers
+    next_value: New_Container
     
 
     def __init__(self, value = None, implementation = Main_C_Implementation):
         super().__init__(value)
-        self.implementation = implementation(self)
-        #self.implementation.add_owner(self)
-        
+        self.implementation = implementation(self)        
     
     def append(self, item):
-        #print(item)
         self.implementation.append(item)
-        #new_item = item
-        #if self.value == None:
-        #    super().append(new_item)
-        #    return
-        #if self.is_main_container:
-        #    new_item = Containers(item, is_main_container=False)
-        #try: 
-        #    super().append(new_item)
-        #except IndexError:
-        #    self.next_value.append(new_item)
 
+    def __getitem__(self, index):
+        if index > len(self):
+            raise IndexError
+        counter = 0
+        for item in self:
+            if counter == index:
+                return item
+            counter += 1
+
+    def __add__(self, items):
+        type_self = type(self)
+        type_items = type(items)
+        if type_items is type_self:
+            for item in items:
+                self.append(item.value)
+        else:
+            raise TypeError(f'can only concatenate {str(type_self)} (not "{str(type_items)}") to {str(type_self)}')
+        
     def __repr__(self):
         representation = ''
         for value in self:
             if value != None:
-                print('is in repr')
-                input(value.value)
                 representation += str(value.value) + ', '    
         representation = representation[:-2]
         return '(' + representation + ')'
@@ -52,13 +55,20 @@ class Containers(New_Container): # kanske vill ha attribut för om detta är huv
 
 def main():
     a = Containers()
-    a + 1
-    a + 2
-    a + 3
-    a + 'strumpa'
-    #a + a
+    a.append(3)
+    a.append('strumpa')
+    for i in range(4):
+        a.append(i)
+
+    b = Containers()
+    b.append(6)
+    #b.append(None)
+    b.append(7)
+
+    a.append(b)
+    a + b
+
     print(a) 
-    #print(len(a))
 
 if __name__ == '__main__':
     main()

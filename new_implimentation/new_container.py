@@ -1,8 +1,8 @@
 from value import Value
-from abc import ABC, abstractmethod
 from container_implementation import *
+from contains_interface import I_Contains
 
-class New_Container(ABC):
+class New_Container(I_Contains):
     value = Value()
     next_value = Value()
     implementation: C_Implementation_Interface
@@ -12,11 +12,23 @@ class New_Container(ABC):
         self.next_value = None
         self.implementation = C_Implementation(self)
         
-    def __add__(self, item):
-        self.append(item)
-    
+    def get_value(self):
+        return self.value
+
     def set_value(self, item):
         self.value = item
+
+    def get_next_value(self):
+        return self.next_value
+    
+    def set_next_value(self, item):
+        self.next_value = item
+
+    def append(self, item):
+        self.implementation.append(item)
+
+    def __add__(self, item):
+        self.append(item)
 
     def __len__(self):
         length = 0
@@ -24,17 +36,6 @@ class New_Container(ABC):
             if self != None:
                 length += 1
         return length
-
-    def append(self, item):
-        self.implementation.append(item)
-        #match None:
-        #    case self.value: 
-        #        self.value = item
-        #        return
-        #    case self.next_value: 
-        #        self.next_value = item
-        #        return
-        #    case _: raise IndexError
 
     def __repr__(self):
         representation = ''
@@ -45,7 +46,7 @@ class New_Container(ABC):
         return representation
     
     def __iter__(self):
-        self.test_index = 0  # For testeing, mainly of __next__. should be removed later
+        self.test_index = 0 
         return self
     
     def __next__(self):
@@ -65,7 +66,9 @@ def main():
     a = New_Container()
     a + 1
     a + 2
+
     print(a)
+    #a + 3
 
 if __name__ == '__main__':
     main()
