@@ -35,7 +35,7 @@ class C_Implementation(C_Implementation_Interface):
 
 class Main_C_Implementation(C_Implementation):
     def append(self, item):
-        if self.owner.get_value == None:
+        if self.owner.get_value() == None:
             self.owner.set_value(item)
             return
         new_item = self.owner.__class__(item, Regular_C_Implementation)
