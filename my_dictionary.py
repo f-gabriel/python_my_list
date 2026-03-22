@@ -1,35 +1,34 @@
-from multicontainer import Multicontainer
-from new_implimentation.value import Value
+from containers import Containers
+from container import Container
+from value import Value
 
-class MyDictionary(Multicontainer):
-    key = Value()
+class My_Dictionary(Containers):
+    def __init__(self, is_first_append = True):
+        super().__init__(None, is_first_append)
+
+
+    def append(self, key, value = None):
+        item = Container(key)
+        item.append(value)
+        super().append(item)
     
-    def __init__(self, key = None, value=None):
-        super().__init__(value, "{}")
-        self.key = key
-
-    def add(self, key, value = None):
-        key_is_new_key = True
-        item: MyDictionary
+    def items(self):
+        items = Containers()
         for item in self:
-            key_is_new_key = key_is_new_key and item.key != key
-        if key_is_new_key:
-            self.add(value)
-            new_container: MyDictionary = self[len(self) -1]
-            new_container.key = key
-
-    def items():
-
+            items.append(item)
+        return items
+    
+    
 
     def __getitem__(self, key):
-        item: MyDictionary
+        item: My_Dictionary
         for item in self:
             if self.key == key:
                 return item.get_value()   
         raise KeyError  
 
     def __contains__(self, item):
-        container: MyDictionary
+        container: My_Dictionary
         for container in self:
             if container.key == item:
                 return True
