@@ -1,7 +1,7 @@
 from container import Container
 from abc import ABC, abstractmethod
 
-class Dictionary_Interface(abc):
+class Dictionary_Interface(ABC):
     @abstractmethod
     def get_key(self):
         pass
@@ -22,7 +22,7 @@ class Key_Value(Container, Dictionary_Interface):
         self.next_item = value
 
     def get_key(self):
-        return self.Item
+        return self.item
     
     def set_key(self, key):
         self.item = key
@@ -32,5 +32,10 @@ class Key_Value(Container, Dictionary_Interface):
     
     def set_value(self, value):
         self.next_item = value
+    
+    def __repr__(self):
+        key = str(self.get_key())
+        value = str(self.get_value())
+        return (f'{key}: {value}')
     
     

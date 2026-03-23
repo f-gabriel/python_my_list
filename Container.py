@@ -3,29 +3,31 @@ from contains_interface import I_Contains
 
 
 class Container(I_Contains): 
-    Item = Item()
+    item = Item()
     next_item = Item()
 
     def __init__(self, item = None): # borde inte ha is_first_append
-        self.Item = item
+        self.item = item
         self.next_item = None
         
     def get_item(self):
-        return self.Item
+        return self.item
 
     def set_item(self, item):
-        self.Item = item
+        self.item = item
 
     def get_next_item(self):
         return self.next_item
     
     def set_next_item(self, item):
+        print('in container:')
+        print(item)
         self.next_item = item
 
     def append(self, item):
         self.appended_items = 0
         match self.appended_items:
-            case 0: self.Item = item
+            case 0: self.item = item
             case 1: self.next_item = item
             case _: raise IndexError('Container can only hold 2 items')
 
@@ -64,7 +66,7 @@ class Container(I_Contains):
     def __next__(self):
         self.index += 1
         match self.test_index:
-            case 1: return self.Item
+            case 1: return self.item
             case 2: return self.next_item
             case _: 
                 self.index = 0

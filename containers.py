@@ -3,17 +3,20 @@ from container import *
 class Containers(Container): 
     next_item: Container
 
-    def __init__(self, item = None, is_first_append = True):
+    def __init__(self, item = None, is_before_first_append = True):
         super().__init__(item)        
-        self.is_first_append = is_first_append
+        self.is_before_first_append = is_before_first_append
     
     def append(self, item):
-        if self.is_first_append:
+        print(item)
+        if self.is_before_first_append:
             self.item = item
-            self.is_first_append = False
+            self.is_before_first_append = False
         else:
              last_container: Containers = super().__getitem__(len(self)- 1)
-             last_container.set_next_item(self.__class__(item, False))
+             print(f'last container is {last_container}')
+             print(item)
+             last_container.set_next_item(self.__class__(item, False)) # här är problemet (konstruktorn lägge inte till item)
         
     def __getitem__(self, index):
         return super().__getitem__(index).get_item()
@@ -38,7 +41,7 @@ class Containers(Container):
     def __repr__(self):
         representation = ''
         for item in self:
-            representation += str(item.Item) + ', '    
+            representation += str(item.item) + ', '    
         representation = representation[:-2]
         return '(' + representation + ')'
     
@@ -47,7 +50,7 @@ class Containers(Container):
         return self
 
     def __next__(self):
-        if self.is_first_append:
+        if self.is_before_first_append:
             raise StopIteration
         elif self.iteration_item == None:
             self.iteration_item = self
