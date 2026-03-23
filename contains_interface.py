@@ -2,16 +2,16 @@ from abc import ABC, abstractmethod
 
 class I_Contains(ABC):
     @abstractmethod
-    def get_value(self):
+    def get_item(self):
         pass
     @abstractmethod
-    def set_value(self):
+    def set_item(self):
         pass
     @abstractmethod
-    def get_next_value(self):
+    def get_next_item(self):
         pass
     @abstractmethod
-    def set_next_value(self, item):
+    def set_next_item(self, item):
         pass
     @abstractmethod
     def append(self, item):

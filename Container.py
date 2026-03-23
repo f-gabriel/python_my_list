@@ -1,32 +1,32 @@
-from value import Value
+from item import Item
 from contains_interface import I_Contains
 
 
 class Container(I_Contains): 
-    value = Value()
-    next_value = Value()
+    Item = Item()
+    next_item = Item()
 
-    def __init__(self, value = None, is_first_append = True):
-        self.value = value
-        self.next_value = None
+    def __init__(self, item = None): # borde inte ha is_first_append
+        self.Item = item
+        self.next_item = None
         
-    def get_value(self):
-        return self.value
+    def get_item(self):
+        return self.Item
 
-    def set_value(self, item):
-        self.value = item
+    def set_item(self, item):
+        self.Item = item
 
-    def get_next_value(self):
-        return self.next_value
+    def get_next_item(self):
+        return self.next_item
     
-    def set_next_value(self, item):
-        self.next_value = item
+    def set_next_item(self, item):
+        self.next_item = item
 
     def append(self, item):
         self.appended_items = 0
         match self.appended_items:
-            case 0: self.value = item
-            case 1: self.next_value = item
+            case 0: self.Item = item
+            case 1: self.next_item = item
             case _: raise IndexError('Container can only hold 2 items')
 
     def __getitem__(self, index):
@@ -41,10 +41,10 @@ class Container(I_Contains):
                 return item
             counter += 1
 
-    def __setitem__(self, index, value):
+    def __setitem__(self, index, item):
         match index:
-            case 0: return self.set_value(value)
-            case 1: return self.set_next_value(value)
+            case 0: return self.set_item(item)
+            case 1: return self.set_next_item(item)
             case _: raise IndexError
 
     def __add__(self, item):
@@ -52,26 +52,29 @@ class Container(I_Contains):
 
     def __repr__(self):
         representation = ''
-        for value in self:
-            representation += str(value) + ', '    
+        for item in self:
+            representation += str(item) + ', '    
         representation = representation[:-2]
         return representation
     
     def __iter__(self):
-        self.test_index = 0 
+        self.index = 0 
         return self
     
     def __next__(self):
-        self.test_index += 1
+        self.index += 1
         match self.test_index:
-            case 1: return self.value
-            case 2: return self.next_value
+            case 1: return self.Item
+            case 2: return self.next_item
             case _: 
-                self.test_index = 0
+                self.index = 0
                 raise StopIteration
     
     def __len__(self):
-        return 2
+        try:
+            return self.appended_items
+        except AttributeError: 
+            return 0
         
 
 

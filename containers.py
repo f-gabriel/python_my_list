@@ -1,25 +1,25 @@
 from container import *
 
 class Containers(Container): 
-    next_value: Container
+    next_item: Container
 
-    def __init__(self, value = None, is_first_append = True):
-        super().__init__(value)        
+    def __init__(self, item = None, is_first_append = True):
+        super().__init__(item)        
         self.is_first_append = is_first_append
     
     def append(self, item):
         if self.is_first_append:
-            self.value = item
+            self.item = item
             self.is_first_append = False
         else:
              last_container: Containers = super().__getitem__(len(self)- 1)
-             last_container.set_next_value(self.__class__(item, False))
+             last_container.set_next_item(self.__class__(item, False))
         
     def __getitem__(self, index):
-        return super().__getitem__(index).get_value()
+        return super().__getitem__(index).get_item()
     
-    def __setitem__(self, index, value):
-        super().__getitem__(index).set_value(value)
+    def __setitem__(self, index, item):
+        super().__getitem__(index).set_item(item)
 
     def __add__(self, items):
         type_self = type(self)
@@ -30,37 +30,37 @@ class Containers(Container):
         new_containers = Containers()
         item: Containers
         for item in self:
-            new_containers.append(item.value)
+            new_containers.append(item.item)
         for item in items:
-            new_containers.append(item.value)   
+            new_containers.append(item.item)   
         return new_containers
         
     def __repr__(self):
         representation = ''
-        for value in self:
-            representation += str(value.value) + ', '    
+        for item in self:
+            representation += str(item.Item) + ', '    
         representation = representation[:-2]
         return '(' + representation + ')'
     
     def __iter__(self):
-        self.iteration_value = self
+        self.iteration_item = self
         return self
 
     def __next__(self):
         if self.is_first_append:
             raise StopIteration
-        elif self.iteration_value == None:
-            self.iteration_value = self
+        elif self.iteration_item == None:
+            self.iteration_item = self
             raise StopIteration
         else:
-            item = self.iteration_value
-            self.iteration_value = self.iteration_value.next_value
+            item = self.iteration_item
+            self.iteration_item = self.iteration_item.next_item
             return item
     
     def __contains__(self, item):
         container: Containers
         for container in self:
-            if container.get_value() == item:
+            if container.get_item() == item:
                 return True
         return False
     

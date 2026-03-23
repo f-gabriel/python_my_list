@@ -1,17 +1,19 @@
 from containers import Containers
 from container import Container
-from value import Value
+from dictionary_container import *
 
-class My_Dictionary(Containers):
+
+class My_Dictionary(Containers, Dictionary_Interface):
     def __init__(self, is_first_append = True):
         super().__init__(None, is_first_append)
+        self.item: Key_Value
 
 
     def append(self, key, value = None):
         if key in self:
-            self[key] = value
-        item = Container(key)
-        item.append(value)
+            raise KeyError(f'Key {key} is already in dictionary. Try ____')
+            self[key] = item
+        item = Key_Value(key, value)
         super().append(item)
     
     def items(self): # inte klar
@@ -21,10 +23,10 @@ class My_Dictionary(Containers):
         return items
     
     def get_key(self):
-        return self.value.value
+        return self.item.get_key()
     
-    def get_item_value(self):
-        return self.value.next_value
+    def get_value(self):
+        return self.item.get_value()
     
     def __repr__(self):
         representation = ''
@@ -40,18 +42,21 @@ class My_Dictionary(Containers):
         item: My_Dictionary
         for item in self:
             if self.get_key() == key:
-                return item.get_item_value()   
+                return item.get_value()   
         raise KeyError  
 
-    def __contains__(self, item):
+    def __contains__(self, key):
         container: My_Dictionary
-        for container in self:
-            if container.key == item:
+        for item in self:
+            if item.get_key() == key:
                 return True
         return False
 
     def __setitem__(self, key, value):
-        item: My_Dictionary
+        item: Key_Value
+        if key in self:
+
         for item in self:
             if self.get_key() == key:
+                ...
 

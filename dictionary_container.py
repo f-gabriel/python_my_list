@@ -1,0 +1,36 @@
+from container import Container
+from abc import ABC, abstractmethod
+
+class Dictionary_Interface(abc):
+    @abstractmethod
+    def get_key(self):
+        pass
+    @abstractmethod
+    def get_value(self):
+        pass
+    @abstractmethod
+    def set_key(self):
+        pass
+    @abstractmethod
+    def set_value(self):
+        pass
+
+
+class Key_Value(Container, Dictionary_Interface):
+    def __init__(self, key, value = None):
+        super().__init__(key)
+        self.next_item = value
+
+    def get_key(self):
+        return self.Item
+    
+    def set_key(self, key):
+        self.item = key
+    
+    def get_value(self):
+        return self.next_item
+    
+    def set_value(self, value):
+        self.next_item = value
+    
+    
