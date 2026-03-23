@@ -1,21 +1,18 @@
-from container import *
+from my_container import *
 
 class Containers(Container): 
     next_item: Container
 
     def __init__(self, item = None, is_before_first_append = True):
-        super().__init__(item)        
+        super().__init__(item)       
         self.is_before_first_append = is_before_first_append
     
     def append(self, item):
-        print(item)
         if self.is_before_first_append:
             self.item = item
             self.is_before_first_append = False
         else:
              last_container: Containers = super().__getitem__(len(self)- 1)
-             print(f'last container is {last_container}')
-             print(item)
              last_container.set_next_item(self.__class__(item, False)) # här är problemet (konstruktorn lägge inte till item)
         
     def __getitem__(self, index):

@@ -6,7 +6,7 @@ class Container(I_Contains):
     item = Item()
     next_item = Item()
 
-    def __init__(self, item = None): # borde inte ha is_first_append
+    def __init__(self, item = None): 
         self.item = item
         self.next_item = None
         
@@ -20,8 +20,6 @@ class Container(I_Contains):
         return self.next_item
     
     def set_next_item(self, item):
-        print('in container:')
-        print(item)
         self.next_item = item
 
     def append(self, item):
