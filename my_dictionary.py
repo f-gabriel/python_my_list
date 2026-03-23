@@ -1,5 +1,4 @@
 from containers import Containers
-from container import Container
 from dictionary_container import *
 
 
@@ -24,6 +23,12 @@ class My_Dictionary(Containers):
             items.append(item)
         return items
     
+    def keys(self):
+        keys_containers = Containers() #skapa factory
+        for item in self:
+            keys_containers.append(item.get_key())
+        return keys_containers
+    
     def get_key(self):
         return self.item.get_key()
     
@@ -33,12 +38,6 @@ class My_Dictionary(Containers):
     def set_value(self, value):
         print(f'value in setitem is {value}')
         self.item.set_value(value)
-
-    def keys(self):
-        keys_containers = Containers() #skapa abstract factory
-        for item in self:
-            keys_containers.append(item.get_key())
-        return keys_containers
             
     def __repr__(self):
         item: Key_Value
@@ -73,6 +72,15 @@ class My_Dictionary(Containers):
 
 
 def main():
+    my_dict = {}
+    my_dict['hej'] = 'då'
+    my_dict['hejsan'] = 'svejsan'
+    print(my_dict)
+
+    d = My_Dictionary()
+    d['hej'] = 'då'
+    d['hejsan'] = 'svejsan'
+    print(d)
     ...
 
 
