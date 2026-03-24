@@ -16,3 +16,13 @@ class I_Contains(ABC):
     @abstractmethod
     def append(self, item):
         pass
+    @abstractmethod
+    def set_state(self, state):
+        pass
+    @abstractmethod
+    def get_index_place_keeper(self):
+        pass
+    @abstractmethod
+    def set_index_place_keeper(self, place):
+        pass
+    

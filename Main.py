@@ -1,4 +1,4 @@
-from my_list import My_List
+from list.my_list import My_List
 
 def main():
     c_list = My_List()

@@ -1,12 +1,10 @@
-from containers import Containers
-from dictionary_container import *
+from container.containers import Containers
+from dictionary.dictionary_container import *
 
 
 class My_Dictionary(Containers):
     def __init__(self, item = None, value = None, is_before_first_append = True):
-        if item == None:
-            item = item
-        elif (type(item) != Key_Value):
+        if (type(item) != Key_Value) and (item != None):
             item = Key_Value(item, value)   
         super().__init__(item, is_before_first_append = is_before_first_append)
         self.item: Key_Value 

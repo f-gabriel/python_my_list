@@ -1,25 +1,34 @@
-from container import *
+from container.container import *
+from place_state.containers_place_state import First_empty_state, Contained_state
 
 class Containers(Container): 
-    next_item: Container
+    #next_item: Container
 
-    def __init__(self, item = None, is_before_first_append = True):
-        super().__init__(item)       
-        self.is_before_first_append = is_before_first_append
+    def __init__(self, item = None, place_state = First_empty_state):
+        #place_state = place_state(self)
+        super().__init__(item, place_state)       
+        #self.is_before_first_append = is_before_first_append #skapa ett state pattern
+
+    def __init__(self, first_container, item, place_state: Contained_state):
+        super().__init__(item, place_state)   
+        self.place_state.set_first_container(first_container)    
+        
     
-    def append(self, item):
+    """def append(self, item):
         if self.is_before_first_append:
             self.item = item
             self.is_before_first_append = False
         else:
              last_container: Containers = super().__getitem__(len(self)- 1)
-             last_container.set_next_item(self.__class__(item, False)) # här är problemet (konstruktorn lägge inte till item)
+             last_container.set_next_item(self.__class__(item, False)) """
         
     def __getitem__(self, index):
-        return super().__getitem__(index).get_item()
+        container: Container = super().__getitem__(index)
+        return container.get_item()
     
     def __setitem__(self, index, item):
-        super().__getitem__(index).set_item(item)
+        container: Container = super().__getitem__(index)
+        container.set_item(item)
 
     def __add__(self, items):
         type_self = type(self)
@@ -43,10 +52,10 @@ class Containers(Container):
         return '(' + representation + ')'
     
     def __iter__(self):
-        self.iteration_item = self
+        self.index_place = self
         return self
 
-    def __next__(self):
+    """def __next__(self):
         if self.is_before_first_append:
             raise StopIteration
         elif self.iteration_item == None:
@@ -55,7 +64,7 @@ class Containers(Container):
         else:
             item = self.iteration_item
             self.iteration_item = self.iteration_item.next_item
-            return item
+            return item"""
     
     def __contains__(self, item):
         container: Containers
