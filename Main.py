@@ -1,7 +1,13 @@
-from list.my_list import My_List
+import sys
+
+"""from container import *
+from dictionary import *
+from list import *
+from place_state import *"""
 
 def main():
-    c_list = My_List()
+    print(sys.path)
+    """c_list = My_List()
     for i in range(5):
         c_list.add(i)
 
@@ -16,7 +22,7 @@ def main():
     
     print(c_list)
     print(c_list[2])
-
+"""
     
     
 if __name__ == '__main__':

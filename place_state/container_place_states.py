@@ -1,7 +1,11 @@
-from place_state.place_state import Place_state
+import sys
+
+sys.path.append('c:\\Users\\nilss\\OneDrive\\Skrivbord\\programering\\Python\\Projekt\\my_list\\python_my_list')
+
+import place_state.place_state as ps
 
 
-class Container_empty_state(Place_state):
+class Container_empty_state(ps.Place_state):
     def append(self, item):
         self.owner.set_item(item) 
         self.owner.set_state(Container_open_state(self.owner))
@@ -9,7 +13,7 @@ class Container_empty_state(Place_state):
     def __next__(self):
         raise StopIteration
     
-class Container_open_state(Place_state):
+class Container_open_state(ps.Place_state):
     def append(self, item):
         self.owner.set_next_item(item)
         self.owner.set_state(Container_closed_state(self.owner))
@@ -21,7 +25,7 @@ class Container_open_state(Place_state):
             return self.owner.get_item()
         raise StopIteration
     
-class Container_closed_state(Place_state):
+class Container_closed_state(ps.Place_state):
     def append(self, item):
         raise IndexError('Container can only hold 2 items')
     

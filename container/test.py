@@ -2,9 +2,12 @@ import sys
 
 sys.path.append('c:\\Users\\nilss\\OneDrive\\Skrivbord\\programering\\Python\\Projekt\\my_list\\python_my_list')
 
-from container.containers import Containers
+import place_state.place_state as ps
 
-class My_List(Containers):
-    
-    def sort():
-        pass
+
+
+def main():
+    print(sys.path)
+
+if __name__=='__main__':
+    main()

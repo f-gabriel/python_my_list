@@ -1,5 +1,9 @@
+import sys
+
+sys.path.append('c:\\Users\\nilss\\OneDrive\\Skrivbord\\programering\\Python\\Projekt\\my_list\\python_my_list')
+
 from abc import ABC, abstractmethod
-from container.contains_interface import I_Contains
+#import container.contains_interface as CI
 
 class Place_state_interface(ABC):
     @abstractmethod
@@ -10,7 +14,7 @@ class Place_state_interface(ABC):
         pass
 
 class Place_state(Place_state_interface):
-    owner: I_Contains
+    #owner: CI.I_Contains
 
     def __init__(self, owner):
         self.owner = owner

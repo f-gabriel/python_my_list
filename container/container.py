@@ -1,15 +1,24 @@
-from container.item import Item
-from container.contains_interface import I_Contains
-from place_state.place_state import Place_state_interface
-from place_state.container_place_states import Container_empty_state
+import sys
+
+sys.path.append('c:\\Users\\nilss\\OneDrive\\Skrivbord\\programering\\Python\\Projekt\\my_list\\python_my_list')
+
+from item import Item
+from contains_interface import I_Contains
+import place_state.place_state as ps
+#from place_state.place_state import Place_state_interface
+import place_state.container_place_states as cps
+
+#from place_state.container_place_states import Container_empty_state
+
 
 
 class Container(I_Contains): 
     item = Item()
     next_item = Item()
-    place_state: Place_state_interface
+    place_state: ps.Place_state_interface
 
-    def __init__(self, item = None, place_state = Container_empty_state): 
+    def __init__(self, item = None, place_state = cps.Container_empty_state): 
+        
         self.place_state = place_state(self)
         
         if item != None:

@@ -1,17 +1,21 @@
-from container.container import *
+import sys
+
+sys.path.append('c:\\Users\\nilss\\OneDrive\\Skrivbord\\programering\\Python\\Projekt\\my_list\\python_my_list')
+
+from container.container import Container
 from place_state.containers_place_state import First_empty_state, Contained_state
 
 class Containers(Container): 
-    #next_item: Container
+    """#next_item: Container
 
     def __init__(self, item = None, place_state = First_empty_state):
         #place_state = place_state(self)
         super().__init__(item, place_state)       
-        #self.is_before_first_append = is_before_first_append #skapa ett state pattern
+        #self.is_before_first_append = is_before_first_append #skapa ett state pattern"""
 
-    def __init__(self, first_container, item, place_state: Contained_state):
-        super().__init__(item, place_state)   
-        self.place_state.set_first_container(first_container)    
+    def __init__(self, item, place_state = Contained_state, first_container = None):
+        state = place_state(self, first_container)
+        super().__init__(item, place_state)    
         
     
     """def append(self, item):

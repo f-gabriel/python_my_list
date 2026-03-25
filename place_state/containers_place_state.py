@@ -1,4 +1,9 @@
-from place_state.place_state import Place_state
+import sys
+
+sys.path.append('c:\\Users\\nilss\\OneDrive\\Skrivbord\\programering\\Python\\Projekt\\my_list\\python_my_list')
+
+import place_state
+#from place_state.place_state import Place_state
 from container.contains_interface import I_Contains
 
 
